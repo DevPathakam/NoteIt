@@ -4,7 +4,7 @@ import {
   findOneUserByEmailOrUsername,
 } from "../services/userService.js";
 import { generateToken } from "../utils/jwtUtil.js";
-import { invalidRequest } from "../utils/reqResUtil.js";
+import { invalidRequest, serverError } from "../utils/reqResUtil.js";
 
 export const signup = async (req, res) => {
   try {
@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
     }
 
     const newUser = await createUser(userToAdd);
-    res.status(201).json({
+    return res.status(201).json({
       _id: newUser._id,
       name: newUser.name,
       email: newUser.email,
@@ -41,9 +41,7 @@ export const signup = async (req, res) => {
       token: generateToken(newUser._id),
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: responseMessages.serverDefaultError, error });
+    return serverError(res, responseMessages.responseOf.auth_signup, error);
   }
 };
 
@@ -80,8 +78,6 @@ export const login = async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: responseMessages.serverDefaultError, error });
+    return serverError(res, responseMessages.responseOf.auth_login, error);
   }
 };

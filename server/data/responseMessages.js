@@ -22,11 +22,14 @@ const validationMessages = {
   isInvalid: "is invalid",
 };
 
-const requests = {
-  createCustomNoteType: "Create a user-defined note type",
-  getNoteTypes: "Get all note types (System + User-defined)",
-  createNote: "Create a note",
-  editNote: "Edit a note",
+const requestPaths = {
+  auth_signup: "User signup",
+  auth_login: "User login",
+  users_profile: "Get user profile",
+  noteTypes_createCustomNoteType: "Create a user-defined note type",
+  noteTypes_getNoteTypes: "Get all note types (System + User-defined)",
+  notes_createNote: "Create a note",
+  notes_editNote: "Edit a note",
 };
 
 const responseMessages = {
@@ -41,7 +44,7 @@ const responseMessages = {
   noToken: "No token",
   tokenFailed: "Token failed",
   userNotFound: "No such user exists",
-  request: requests,
+  responseOf: requestPaths,
   field: fieldNames,
   validation: validationMessages,
 };

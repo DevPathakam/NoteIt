@@ -4,7 +4,7 @@ import {
   findOneUserNoteType,
   findUserNoteTypes,
 } from "../services/noteTypeService.js";
-import { invalidRequest } from "../utils/reqResUtil.js";
+import { invalidRequest, serverError } from "../utils/reqResUtil.js";
 
 // Create a user-defined note type
 export const createCustomNoteType = async (req, res) => {
@@ -23,11 +23,11 @@ export const createCustomNoteType = async (req, res) => {
     const newNoteType = await createUserNoteType(name, userId);
     return res.status(201).json(newNoteType);
   } catch (error) {
-    return res.status(500).json({
-      request: responseMessages.request.createCustomNoteType,
-      message: responseMessages.serverDefaultError,
-      error,
-    });
+    return serverError(
+      res,
+      responseMessages.responseOf.noteTypes_createCustomNoteType,
+      error
+    );
   }
 };
 
@@ -40,10 +40,10 @@ export const getNoteTypes = async (req, res) => {
     const noteTypes = await findUserNoteTypes(userId);
     return res.status(200).json(noteTypes);
   } catch (error) {
-    return res.status(500).json({
-      request: responseMessages.request.getNoteTypes,
-      message: responseMessages.serverDefaultError,
-      error,
-    });
+    return serverError(
+      res,
+      responseMessages.responseOf.noteTypes_getNoteTypes,
+      error
+    );
   }
 };

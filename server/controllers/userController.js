@@ -1,5 +1,6 @@
 import responseMessages from "../data/responseMessages.js";
 import { findUserById } from "../services/userService.js";
+import { serverError } from "../utils/reqResUtil.js";
 
 export const getUserProfile = async (req, res) => {
   try {
@@ -11,8 +12,6 @@ export const getUserProfile = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: responseMessages.serverDefaultError, error });
+    return serverError(res, responseMessages.responseOf.users_profile, error);
   }
 };
