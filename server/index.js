@@ -4,10 +4,14 @@ import connectDB from "./config/db.js";
 import process from "process";
 import seedSystemNoteTypes from "./seeders/seedData.js";
 
+// Route imports
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
 import noteTypeRoutes from "./routes/noteTypeRoutes.js";
+
+// Cron job imports
+import "./crons/deleteOldNotes.js"; // Delete old notes every 3 days
 
 try {
   const app = express();

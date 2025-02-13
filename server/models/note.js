@@ -28,6 +28,7 @@ const noteSchema = new Schema(
       type: Number,
       default: null, // Null for unpinned notes
     },
+    deleted: { type: Boolean, default: false }, // Soft delete flag
   },
   { timestamps: true }
 );

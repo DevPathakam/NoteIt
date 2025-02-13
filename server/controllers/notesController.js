@@ -1,7 +1,9 @@
 import responseMessages from "../data/responseMessages.js";
 import {
   createUserNote,
+  findOneAndRemoveUserNote,
   findOneAndUpdateUserNote,
+  findUserNotes,
 } from "../services/noteService.js";
 import { findOneUserNoteTypeById } from "../services/noteTypeService.js";
 import { invalidRequest, serverError } from "../utils/reqResUtil.js";
@@ -66,5 +68,41 @@ export const editNote = async (req, res) => {
     return res.status(201).json(updatedNote);
   } catch (error) {
     return serverError(res, responseMessages.responseOf.notes_editNote, error);
+  }
+};
+
+export const removeNote = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const noteId = req.params.id;
+
+    const deletedNote = await findOneAndRemoveUserNote(noteId, userId);
+    return res.status(200).json(deletedNote);
+  } catch (error) {
+    return serverError(
+      res,
+      responseMessages.responseOf.notes_removeNote,
+      error
+    );
+  }
+};
+
+export const getUserNotes = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { lastNoteId, limit } = req.query;
+
+    const userNotes = await findUserNotes({
+      lastNoteId,
+      userId,
+      limit: parseInt(limit, 10) || 10,
+    });
+    return res.status(200).json(userNotes);
+  } catch (error) {
+    return serverError(
+      res,
+      responseMessages.responseOf.notes_getUserNotes,
+      error
+    );
   }
 };

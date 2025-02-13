@@ -30,6 +30,8 @@ const requestPaths = {
   noteTypes_getNoteTypes: "Get all note types (System + User-defined)",
   notes_createNote: "Create a note",
   notes_editNote: "Edit a note",
+  notes_removeNote: "Remove a note",
+  notes_getUserNotes: "Get all notes for a user",
 };
 
 const responseMessages = {
