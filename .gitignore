@@ -1,0 +1,13 @@
+# Ignore Node.js & React dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore system files
+.DS_Store
+.vscode/
+.idea/
